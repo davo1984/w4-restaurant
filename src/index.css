@@ -7,6 +7,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  background-color: ivory;
+  background-image: './images/fleur-de-lis.jpeg';
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; 
+  /* background-image: "./images/fleur-de-lis.jpeg"; */
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
