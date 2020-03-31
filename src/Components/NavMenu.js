@@ -28,8 +28,8 @@ class NavMenu extends Component {
               <FontAwesomeIcon icon={faCloudMeatball} /></a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">
-              Haggis, not allowed to be sold in America for human consumption
+            <a className="nav-link" id="pills-haggis-tab" data-toggle="pill" href="#pills-haggis" role="tab" aria-controls="pills-haggis" aria-selected="false">
+              Haggis
               <FontAwesomeIcon icon={faLungsVirus} /></a>
           </li>
         </ul>
@@ -37,7 +37,7 @@ class NavMenu extends Component {
           <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">Drink special content</div>
           <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">Special Special content</div>
           <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">totally unspecial special content.</div>
-          <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">Content: sheep's offal stuffed in its stomach.</div>
+          <div className="tab-pane fade" id="pills-haggis" role="tabpanel" aria-labelledby="pills-haggis-tab">Content: sheep's offal stuffed in its stomach.</div>
         </div>
       </div>
     );

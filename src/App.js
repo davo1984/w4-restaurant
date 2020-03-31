@@ -2,74 +2,62 @@ import React, { Component } from "react";
 import { faTrademark, faCocktail, faLungsVirus, faCloudMeatball, faFlushed } from "@fortawesome/free-solid-svg-icons";
 import { faGrav } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Axios from "axios";
 import './App.css';
 import ShowMap from './Components/ShowMap.js';
 import NavMenu from './Components/NavMenu.js';
 import AccordianMenu from './Components/AccordianMenu.js';
-import RetrieveMenuItems from './Components/RetrieveMenuItems.js';
+// import RetrieveMenuItems from './Components/RetrieveMenuItems.js';
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = { 
+      menuSize: 0,
+      desertMenu: [ "", 0 ],
+      drinkMenu: [ "", 0 ],
+    }
   }
-  state = {
 
-    "created_at": {
-      "date": "2020-03-29 00:03:26.808224",
-      "timezone_type": 3,
-      "timezone": "UTC"
-    },
-
-    "menu_size": 12,
-
-    "menu_items": [
-      {
-        "description": "Spicy eggplant with vibrant cabbage and adorable peas"
-      },
-      {
-        "description": "Smoky beef ribs with pugnacious tomatoes and watery squash"
-      },
-      {
-        "description": "Frosted beef ribs with canned corn and enveloped spinach"
-      },
-      {
-        "description": "Shaved trout with pan-fried cauliflower and tepid pepper medley"
-      },
-      {
-        "description": "Peppered tuna steak with overturned squash and chopped broccoli"
-      },
-      {
-        "description": "Smashed beef ribs with pan-fried green beans and peppered broccoli"
-      },
-      {
-        "description": "Vibrant tofu with aggressive pumpkin and fragrant carrots"
-      },
-      {
-        "description": "Peevish omelet with roasted brussel sprouts and overturned black beans"
-      },
-      {
-        "description": "Undaunted tuna steak with tepid corn and watery green beans"
-      },
-      {
-        "description": "Impertinent beef ribs with vibrant asparagus and canned spinach"
-      },
-      {
-        "description": "Sauteed pasta with pensive cabbage and swaddled onions"
-      },
-      {
-        "description": "Pulverized shrimp with carmelized green beans and canned corn"
-      }
-    ]
+  fillMenus = (props) => {
+    this.setState (
+      this.state.menuSize = [ Math.floor((Math.random() * 5) + 4) ],
+    )
   }
+
+    componentDidMount = (props) => {
+      console.log('menuSize=', this.state.menuSize);
+      Axios.get("https://entree-f18.herokuapp.com/v1/menu/1" + this.state.menuSize)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            this.setState({
+              isLoaded: true,
+              menuItems: result.items,
+              menuPrice: Math.floor((Math.random() * 12) + 4),
+            });
+            console.log('menuItems='+this.state.menuItems+' menuPrice='+this.state.menuPrice+ ' result.items='+result.items);
+          },
+          // Note: it's important to handle errors here
+          // instead of a catch() block so that we don't swallow
+          // exceptions from actual bugs in components.
+          (error) => {
+            this.setState({
+              isLoaded: true,
+              error
+            });
+          }
+        )
+    }
 
   render() {
+    // {console.log("building menus, dessertMenu", DesertMenu);}
     return (
       <div className="App">
-
         <div className="row mx-3">
           <div className="col-3">
             <h1>Camus&#39; Absurdist Dining</h1>
-            <p>Even after you Fall don't be a Stranger!<FontAwesomeIcon icon={faGrav} /></p>
+            <p>Even after your Fall don't be The Stranger!<FontAwesomeIcon icon={faGrav} /></p>
             <p>Hours:</p>
             <ul className="list-group mx-auto">
               <li className="list-group-item">Mon: Midnight - 8 AM</li>
@@ -88,7 +76,7 @@ class App extends Component {
           <div className="col-3 text-center">
             <h1>Visit our old location!</h1>
 
-            <div id="googleMap" className="pb-5">
+            <div id="googleMap" className="pr-3 pb-3">
               <ShowMap />
             </div>
 

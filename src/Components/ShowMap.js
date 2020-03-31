@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 
 const mapStyles = {
-  width: '100%',
-  height: '100%'
+  width: '90%',
+  height: '80%'
 };
 
 export class ShowMap extends Component {
@@ -12,14 +12,15 @@ export class ShowMap extends Component {
     super(props);
   }
   state = { 
-    camusLocation: { lat: - 91.131517, lng: -91.131517 },
+    camusLocation: { lat: 38.092800, lng: -84.454870 },
   }
   
   render() {
+    { console.log(this.state.props.camusLocation)}
     return (
       <Map
         google={this.props.google}
-        zoom={7}
+        zoom={5}
         style={mapStyles}
         initialCenter={ this.props.state.camusLocation }
       >
