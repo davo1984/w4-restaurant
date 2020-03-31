@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
+import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
 import $ from 'jquery'
 import popper from 'popper.js'
 import "../node_modules/jquery/dist/jquery.min.js";
-import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

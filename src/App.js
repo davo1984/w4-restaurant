@@ -14,41 +14,65 @@ class App extends Component {
     super(props);
     this.state = { 
       menuSize: 0,
-      desertMenu: [ "", 0 ],
-      drinkMenu: [ "", 0 ],
+      subMenu: 
+        [ 
+          [
+            {
+              item: "",
+              price: "",
+              description: ""
+            }, {
+              item: "",
+              price: "",
+              description: ""
+            }, {
+              item: "",
+              price: "",
+              description: ""
+            } 
+          ] 
+        ],
     }
   }
 
-  fillMenus = (props) => {
+  fillMenus = async (props) => {
+    try {
+      return await Axios.get("https://entree-f18.herokuapp.com/v1/menu/" + tempmenuSize) 
+    }
+    catch (error) {
+      console.error(error)  //todo more better error handling
+    }
     this.setState (
       this.state.menuSize = [ Math.floor((Math.random() * 5) + 4) ],
     )
   }
 
-    componentDidMount = (props) => {
-      console.log('menuSize=', this.state.menuSize);
-      Axios.get("https://entree-f18.herokuapp.com/v1/menu/1" + this.state.menuSize)
-        .then(res => res.json())
-        .then(
-          (result) => {
-            this.setState({
-              isLoaded: true,
-              menuItems: result.items,
-              menuPrice: Math.floor((Math.random() * 12) + 4),
-            });
-            console.log('menuItems='+this.state.menuItems+' menuPrice='+this.state.menuPrice+ ' result.items='+result.items);
-          },
-          // Note: it's important to handle errors here
-          // instead of a catch() block so that we don't swallow
-          // exceptions from actual bugs in components.
-          (error) => {
-            this.setState({
-              isLoaded: true,
-              error
-            });
-          }
-        )
-    }
+  componentDidMount = (props) => {
+    let tempmenuSize = Math.floor((Math.random() * 5) + 4);
+    console.log('menuSize=', tempmenuSize);
+    //currently zero
+    Axios.get("https://entree-f18.herokuapp.com/v1/menu/" + tempmenuSize)
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            items: result.data.menu_items,       // append to previous items
+            price: Math.floor((Math.random() * 12) + 4),
+            // .toFixed(2) 
+          });
+          console.log('menuItems='+this.state.menuItems+' menuPrice='+this.state.menuPrice+ ' result.items='+result.items);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
 
   render() {
     // {console.log("building menus, dessertMenu", DesertMenu);}
