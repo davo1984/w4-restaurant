@@ -15,7 +15,7 @@ class App extends Component {
     this.state = { 
       menuSize: 0,
       subMenu: 
-        [ 
+        [ "",
           [
             {
               item: "",
@@ -35,36 +35,53 @@ class App extends Component {
     }
   }
 
-  fillMenus = async (props) => {
-    try {
-      return await Axios.get("https://entree-f18.herokuapp.com/v1/menu/" + tempmenuSize) 
-    }
-    catch (error) {
-      console.error(error)  //todo more better error handling
-    }
-    this.setState (
-      this.state.menuSize = [ Math.floor((Math.random() * 5) + 4) ],
-    )
-  }
+  // fillMenus = async (tempMenuSize) => {            // still needed for "specials"
+  //   try {
+  //     tempMenuSize = Math.floor((Math.random() * 5) + 4);
+  //     return await Axios.get("https://entree-f18.herokuapp.com/v1/menu/" + tempMenuSize) 
+  //   }
+  //   catch (error) {
+  //     console.error(error)  //todo more better error handling
+  //   }
+  //   this.setState (
+  //     this.state.menuSize = [ Math.floor((Math.random() * 5) + 4) ],
+  //   )
+  // }
 
   componentDidMount = (props) => {
-    let tempmenuSize = Math.floor((Math.random() * 5) + 4);
-    console.log('menuSize=', tempmenuSize);
-    //currently zero
-    Axios.get("https://entree-f18.herokuapp.com/v1/menu/" + tempmenuSize)
+    let tempMenuSize = Math.floor((Math.random() * 5) + 4);
+    console.log('menuSize=', tempMenuSize);
+    
+    Axios.get("https://entree-f18.herokuapp.com/v1/menu/" + tempMenuSize)
       .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            items: result.data.menu_items,       // append to previous items
-            price: Math.floor((Math.random() * 12) + 4),
-            // .toFixed(2) 
+        (result) => {          // is fill Menu above better way to call axios?
+          Axios.get("https://entree-f18.herokuapp.com/v1/menu/"+tempMenuSize);
+          // let proxySubMenu = this.state.subMenu;           //  ???
+          // let proxySubMenu[0] = result.data.menu_items;    //  ???
+
+          // set subMenuName
+
+          // while more descriptions in result.data.menu_items;
+          //    get next item
+          //    name = item.split('with');  //drop this
+          //    description = item;
+          //    price = ((Math.random() * 12) + 4).toFixed(2);  // random price
+          //    price = price.toFixed(2);                       // 2 decimals
+          //    
+          //    If the subMenu is filled do this:
+          //        create JSON string
+          //        write to local storage
+          //        change to next subMenuName    ?? key
+          //        clear the array data
+
+          this.setState({ 
+            isLoaded: true,   // needed?
           });
-          console.log('menuItems='+this.state.menuItems+' menuPrice='+this.state.menuPrice+ ' result.items='+result.items);
+
+
+          console.log('menuItems='+this.state.item+' menuPrice='+this.state.price);
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
+        // todo more better handle errors here
         (error) => {
           this.setState({
             isLoaded: true,
@@ -112,5 +129,21 @@ class App extends Component {
     );
   }
 }
+
+// function displaySubMenu (subMenuName) {
+
+//   {/* get localstorage for subMenuName 
+//                        Alternatively loop through #s x-y below **
+//               map(?) localstorage into subMenuArray
+//               <div>
+//                 <table>
+//                   <tr>
+//                     loop through subMenuArray           **
+//                         <td>descripton</td>
+//                         <td>price</td>
+//                   </tr>
+//                 </table>
+//               </div> */}
+// }
 
 export default App;

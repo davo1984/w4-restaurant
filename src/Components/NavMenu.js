@@ -34,7 +34,7 @@ class NavMenu extends Component {
           </li>
         </ul>
         <div className="tab-content" id="pills-tabContent">
-          <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">Drink special content</div>
+          <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">Call axios to get one special here</div>
           <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">Special Special content</div>
           <div className="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">totally unspecial special content.</div>
           <div className="tab-pane fade" id="pills-haggis" role="tabpanel" aria-labelledby="pills-haggis-tab">Content: sheep's offal stuffed in its stomach.</div>
