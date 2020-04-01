@@ -23,8 +23,16 @@ class AccordianMenu extends Component {
               <div>
                 <table className="table table-striped">
                   <tbody>
-                    <tr>
-                      <td align="left">description 0</td>
+                  {/* //this.props.menuItems.map <tr> item.description item.price</tbody> */}
+
+                    <tr key={ index }>
+                      {this.props.menuItems.map((value, index) => {
+                        return <td key={index}>{value}</td>
+                      })}
+                    </tr>
+
+                    {/* <tr key={index}>
+                      <td align="left">{item.description}</td>
                       <td align="right">$14.95</td>
                     </tr>
                     <tr>
@@ -34,7 +42,7 @@ class AccordianMenu extends Component {
                     <tr>
                       <td align="left">description 2</td>
                       <td align="right">$4.95</td>
-                    </tr>
+                    </tr> */}
                   </tbody>
                 </table>
               </div>

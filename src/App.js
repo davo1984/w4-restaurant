@@ -14,72 +14,43 @@ class App extends Component {
     super(props);
     this.state = { 
       menuSize: 0,
-      subMenu: 
-        [ "",
-          [
-            {
-              item: "",
-              price: "",
-              description: ""
-            }, {
-              item: "",
-              price: "",
-              description: ""
-            }, {
-              item: "",
-              price: "",
-              description: ""
-            } 
-          ] 
-        ],
+      menuArr: [{name: "Deserts", num: 18},{name: "Appetizers", num: 8}],
+      subMenu: [],
     }
   }
 
-  // fillMenus = async (tempMenuSize) => {            // still needed for "specials"
-  //   try {
-  //     tempMenuSize = Math.floor((Math.random() * 5) + 4);
-  //     return await Axios.get("https://entree-f18.herokuapp.com/v1/menu/" + tempMenuSize) 
-  //   }
-  //   catch (error) {
-  //     console.error(error)  //todo more better error handling
-  //   }
-  //   this.setState (
-  //     this.state.menuSize = [ Math.floor((Math.random() * 5) + 4) ],
-  //   )
-  // }
-
-  componentDidMount = (props) => {
-    let tempMenuSize = Math.floor((Math.random() * 5) + 4);
-    console.log('menuSize=', tempMenuSize);
-    
-    Axios.get("https://entree-f18.herokuapp.com/v1/menu/" + tempMenuSize)
+  async getMenuItems (location, num){
+    Axios.get("https://entree-f18.herokuapp.com/v1/menu/" + num)
+      // const menuStuff = fillMenus(25)
       .then(
         (result) => {          // is fill Menu above better way to call axios?
-          Axios.get("https://entree-f18.herokuapp.com/v1/menu/"+tempMenuSize);
           // let proxySubMenu = this.state.subMenu;           //  ???
           // let proxySubMenu[0] = result.data.menu_items;    //  ???
 
-          // set subMenuName
-
-          // while more descriptions in result.data.menu_items;
-          //    get next item
-          //    name = item.split('with');  //drop this
-          //    description = item;
-          //    price = ((Math.random() * 12) + 4).toFixed(2);  // random price
-          //    price = price.toFixed(2);                       // 2 decimals
-          //    
-          //    If the subMenu is filled do this:
-          //        create JSON string
-          //        write to local storage
-          //        change to next subMenuName    ?? key
-          //        clear the array data
-
-          this.setState({ 
-            isLoaded: true,   // needed?
+          let tempMenuArr = result.data.menu_items((item, idx) => {
+            item.price = ((Math.random() * 12) + 4).toFixed(2);
+            return item
           });
+          // i is the index
+          // copies the submenu
+          let subMenuArr = this.state.subMenu;
 
+          // sets the submenu to the returned data
+          for (let k = 0; k < tempMenuArr.length; k++) {
+            subMenuArr[location].push(tempMenuArr[k]);
+          }
+          //subMenuArr[i] = tempMenuArr;
+          let isLoaded = false;
 
-          console.log('menuItems='+this.state.item+' menuPrice='+this.state.price);
+          //if (i == this.state.menuArr.length - 1) {
+            //isLoaded = true;
+         // }
+          this.setState({
+            isLoaded: isLoaded,   // needed?
+            subMenu: subMenuArr,
+
+          });
+          console.log('menuItems=' + this.state.item + ' menuPrice=' + this.state.price);
         },
         // todo more better handle errors here
         (error) => {
@@ -87,12 +58,45 @@ class App extends Component {
             isLoaded: true,
             error
           });
-        }
+        }      // setState from component did mount
       )
+  }
+
+  fillMenus = async () => {            // still needed for "specials"
+    try {
+      // tempMenuSize = Math.floor((Math.random() * 5) + 4);
+      for (let i=0 ; i < this.state.menuArr.length ; i++) {// loop here menuArr
+        await this.getMenuItems(i, this.state.menuArr[i].num);
+        // check to make sure we have the right number of items
+        if(this.state.menuArr[i].num != this.state.subMenu[i].length){
+          await this.getMenuItems(i, this.state.menuArr[i].num - this.state.subMenu[i].length);
+        }
+      } //for loop
+      this.setState({
+        isLoaded: true,
+      });
+    }
+    catch (error) {
+      console.error(error)  //todo more better error handling
+    }
+  }
+  // set subMenuName
+
+  // result.data.menuItems ((item, i) => {      //todo how do I loop?
+  //   console.log('do something', item);
+  // })
+
+  async componentDidMount () {
+    // let tempMenuSize = Math.floor((Math.random() * 5) + 4);
+    console.log('menuSize=', tempMenuSize);
+    
+    await this.fillMenus();
+      
   }
 
   render() {
     // {console.log("building menus, dessertMenu", DesertMenu);}
+    if(this.state.isLoaded){
     return (
       <div className="App">
         <div className="row mx-3">
@@ -124,9 +128,18 @@ class App extends Component {
           </div>
         </div>
 
-        <AccordianMenu />
+        <AccordianMenu items={this.state.subMenu[0]} name={this.state.menuArr[0].name}/>
+        <AccordianMenu items={this.state.subMenu[1]} name={this.state.menuArr[1].name} />
+
       </div>
     );
+    } else {
+      return (
+        <>
+        <h1>Loading...</h1>
+        </>
+      );
+    }
   }
 }
 
