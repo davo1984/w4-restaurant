@@ -19,15 +19,13 @@ class App extends Component {
     }
   }
 
-  async getMenuItems (location, num){
+  async getMenuItems ( location, num){
     Axios.get("https://entree-f18.herokuapp.com/v1/menu/" + num)
       // const menuStuff = fillMenus(25)
       .then(
-        (result) => {          // is fill Menu above better way to call axios?
-          // let proxySubMenu = this.state.subMenu;           //  ???
-          // let proxySubMenu[0] = result.data.menu_items;    //  ???
+        (result) => { 
 
-          let tempMenuArr = result.data.menu_items((item, idx) => {
+          let tempMenuArr = result.data.menu_items.map((item, idx) => {
             item.price = ((Math.random() * 12) + 4).toFixed(2);
             return item
           });
@@ -37,7 +35,7 @@ class App extends Component {
 
           // sets the submenu to the returned data
           for (let k = 0; k < tempMenuArr.length; k++) {
-            subMenuArr[location].push(tempMenuArr[k]);
+            subMenuArr.push(tempMenuArr[k]);
           }
           //subMenuArr[i] = tempMenuArr;
           let isLoaded = false;
@@ -80,15 +78,8 @@ class App extends Component {
       console.error(error)  //todo more better error handling
     }
   }
-  // set subMenuName
-
-  // result.data.menuItems ((item, i) => {      //todo how do I loop?
-  //   console.log('do something', item);
-  // })
 
   async componentDidMount () {
-    // let tempMenuSize = Math.floor((Math.random() * 5) + 4);
-    console.log('menuSize=', tempMenuSize);
     
     await this.fillMenus();
       
@@ -136,27 +127,11 @@ class App extends Component {
     } else {
       return (
         <>
-        <h1>Loading...</h1>
+        <h1>Loading...TODO place spinner here</h1>
         </>
       );
     }
   }
 }
-
-// function displaySubMenu (subMenuName) {
-
-//   {/* get localstorage for subMenuName 
-//                        Alternatively loop through #s x-y below **
-//               map(?) localstorage into subMenuArray
-//               <div>
-//                 <table>
-//                   <tr>
-//                     loop through subMenuArray           **
-//                         <td>descripton</td>
-//                         <td>price</td>
-//                   </tr>
-//                 </table>
-//               </div> */}
-// }
 
 export default App;
