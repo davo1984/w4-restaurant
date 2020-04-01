@@ -8,6 +8,13 @@ class AccordianMenu extends Component {
     super(props);
   }
   render() {
+    let items = this.props.items.map(( item, idx ) => {
+      return (
+        <tr key={ idx }>
+          <td key={ 0 }>{item.description} ${item.price}.00</td>
+        </tr>
+      )
+    });
     return (
       // {/* Accordian Below! */ }
       <div id="accordion">
@@ -23,13 +30,7 @@ class AccordianMenu extends Component {
               <div>
                 <table className="table table-striped">
                   <tbody>
-                  {/* //this.props.menuItems.map <tr> item.description item.price</tr> */}
-
-                    <tr key={ 0 }>
-                      { this.props.menuItems.map(( menu_items, idx ) => {
-                        return <td key={ 0 }>menu_items.description, menu_items.price</td>
-                      })}
-                    </tr>
+      {items}
 
                   </tbody>
                 </table>
