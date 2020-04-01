@@ -24,39 +24,23 @@ class App extends Component {
       // const menuStuff = fillMenus(25)
       .then(
         (result) => { 
-
           let tempMenuArr = result.data.menu_items.map((item, idx) => {
             item.price = ((Math.random() * 12) + 4).toFixed(2);
             return item
           });
           // i is the index
           // copies the submenu
-          let subMenuArr = this.state.subMenu;
-
-          // sets the submenu to the returned data
-          for (let k = 0; k < tempMenuArr.length; k++) {
-            subMenuArr.push(tempMenuArr[k]);
+          let subMenuArr = this.state.subMenu; // includes subMenu[0], subMenu[1]
+          if(subMenuArr[location] === undefined){
+            subMenuArr.push(tempMenuArr);
+          } else {
+            subMenuArr[location] = tempMenuArr;
           }
-          //subMenuArr[i] = tempMenuArr;
-          let isLoaded = false;
 
-          //if (i == this.state.menuArr.length - 1) {
-            //isLoaded = true;
-         // }
           this.setState({
-            isLoaded: isLoaded,   // needed?
             subMenu: subMenuArr,
-
-          });
-          console.log('menuItems=' + this.state.item + ' menuPrice=' + this.state.price);
-        },
-        // todo more better handle errors here
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }      // setState from component did mount
+          }); 
+        }
       )
   }
 
