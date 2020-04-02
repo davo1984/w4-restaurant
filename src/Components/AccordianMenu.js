@@ -11,7 +11,7 @@ class AccordianMenu extends Component {
     let items = this.props.items.map(( item, idx ) => {
       return (
         <tr key={ idx }>
-          <td key={ 0 }>{item.description} ${item.price}.00</td>
+          <td key={ 0 }>{item.description}</td><td className="text-right"> ${item.price}</td>
         </tr>
       )
     });
@@ -20,24 +20,18 @@ class AccordianMenu extends Component {
       <div id="accordion">
         <div className="card">
           <div className="card-header" id="headingOne">
-            <h5 className="mb-0">
-              <button className="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Life is Uncertain, Eat Desert FIRST!<FontAwesomeIcon icon={faTrademark} /></button>
-            </h5>
+            <button className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.name} aria-expanded="true" aria-controls={"collapse"+this.props.name}>
+              {this.props.title}</button>
           </div>
-          <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div id={"collapse"+this.props.name} className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
             <div className="card-body">
               <div>
-                <table className="table table-striped">
+                <table className="table table-striped w-50 p-3">
                   <tbody>
-      {items}
-
+                    {items}
                   </tbody>
                 </table>
               </div>
-              Temp text of menu for test. Properly rendered menu should appear above! 
-              accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-
             </div>
           </div>
         </div>

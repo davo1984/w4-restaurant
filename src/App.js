@@ -14,14 +14,17 @@ class App extends Component {
     super(props);
     this.state = { 
       menuSize: 0,
-      menuArr: [{name: "Deserts", num: 18},{name: "Appetizers", num: 8}],
+    menuArr: [{ name: "Deserts", title: "Life is Uncertain, Eat Desert FIRST!", num: 18},
+      { name: "Appetizers", title: "Appetizers and Hors d'oeuvres", num: 8},
+      { name: "Entrees", title: "Entrees", num: 9 },
+      { name: "Seafood", title: "Seafood Main Courses", num: 12 },
+      ],
       subMenu: [],
     }
   }
 
   async getMenuItems ( location, num){
     Axios.get("https://entree-f18.herokuapp.com/v1/menu/" + num)
-      // const menuStuff = fillMenus(25)
       .then(
         (result) => { 
           let tempMenuArr = result.data.menu_items.map((item, idx) => {
@@ -46,19 +49,20 @@ class App extends Component {
 
   fillMenus = async () => {            // still needed for "specials"
     try {
-      // tempMenuSize = Math.floor((Math.random() * 5) + 4);
-      for (let i=0 ; i < this.state.menuArr.length ; i++) {// loop here menuArr
+      for (let i=0 ; i < this.state.menuArr.length ; i++) {  // loop here menuArr
         await this.getMenuItems(i, this.state.menuArr[i].num);
         // check to make sure we have the right number of items
         if(this.state.menuArr[i].num != this.state.subMenu[i].length){
           await this.getMenuItems(i, this.state.menuArr[i].num - this.state.subMenu[i].length);
+          console.log('i=',i);
         }
-      } //for loop
+      }
       this.setState({
         isLoaded: true,
       });
     }
     catch (error) {
+      console.log(error)
       console.error(error)  //todo more better error handling
     }
   }
@@ -96,15 +100,17 @@ class App extends Component {
           <div className="col-3 text-center">
             <h1>Visit our old location!</h1>
 
-            <div id="googleMap" className="pr-3 pb-3">
+            {/* <div id="googleMap" className="pr-3 pb-3">
               <ShowMap />
-            </div>
+            </div> */}
 
           </div>
         </div>
 
-        <AccordianMenu items={this.state.subMenu[0]} name={this.state.menuArr[0].name}/>
-        <AccordianMenu items={this.state.subMenu[1]} name={this.state.menuArr[1].name} />
+        <AccordianMenu items={this.state.subMenu[0]} 
+            name={this.state.menuArr[0].name}/>
+        <AccordianMenu items={this.state.subMenu[1]} 
+            name={this.state.menuArr[1].name} />
 
       </div>
     );
