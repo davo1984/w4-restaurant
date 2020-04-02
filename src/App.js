@@ -4,8 +4,8 @@ import React, { Component } from "react";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Axios from "axios";
 import './App.css';
-import ShowMap from './Components/ShowMap.js';
-import NavMenu from './Components/NavMenu.js';
+// import ShowMap from './Components/ShowMap.js';
+// import NavMenu from './Components/NavMenu.js';
 import AccordianMenu from './Components/AccordianMenu.js';
 // import RetrieveMenuItems from './Components/RetrieveMenuItems.js';
 
@@ -14,10 +14,14 @@ class App extends Component {
     super(props);
     this.state = { 
       menuSize: 0,
-    menuArr: [{ name: "Deserts", title: "Life is Uncertain, Eat Desert FIRST!", num: 18},
+    menuArr: [
+      { name: "Deserts", title: "Life is Uncertain, Eat Desert FIRST!", num: 18},
       { name: "Appetizers", title: "Appetizers and Hors d'oeuvres", num: 8},
       { name: "Entrees", title: "Entrees", num: 9 },
-      { name: "Seafood", title: "Seafood Main Courses", num: 12 },
+      { name: "Seafood", title: "Seafood Main Courses", num: 14 },
+      { name: "Meat", title: "Beef, Veil, Lamb and Goat", num: 7 },
+      { name: "Vegan", title: "Vegan and Vegetarian Courses", num: 9 },
+      { name: "Haggis", title: "Haggis and other abominations", num: 3 },
       ],
       subMenu: [],
       isLoaded: false,
@@ -83,7 +87,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="row mx-3">
-          <div className="col-3">
+          <div className="col-3 py-3">
             <h1>Camus&#39; Absurdist Dining</h1>
             <p>Even after your Fall don't be The Stranger!</p>
             {/* <p>Even after your Fall don't be The Stranger!<FontAwesomeIcon icon={faGrav} /></p> */}
@@ -100,7 +104,7 @@ class App extends Component {
           </div>
           <div className="col-6">
             <img src="./images/fleur-de-lis.jpeg" className="rounded-circle mt-1" alt="Our establishment" /><p>348 East Main Street<br />Lexington, KY</p>
-            <NavMenu />
+            {/* <NavMenu /> */}
           </div>
           <div className="col-3 text-center">
             <h1>Visit our old location!</h1>
@@ -119,6 +123,26 @@ class App extends Component {
         <AccordianMenu items={this.state.subMenu[1]}
           title={this.state.menuArr[1].title} 
           name={this.state.menuArr[1].name} />
+
+        <AccordianMenu items={this.state.subMenu[2]}
+          title={this.state.menuArr[2].title}
+          name={this.state.menuArr[2].name} />
+
+        <AccordianMenu items={this.state.subMenu[3]}
+          title={this.state.menuArr[3].title}
+          name={this.state.menuArr[3].name} />
+
+        <AccordianMenu items={this.state.subMenu[4]}
+          title={this.state.menuArr[4].title}
+          name={this.state.menuArr[4].name} />
+
+        <AccordianMenu items={this.state.subMenu[5]}
+          title={this.state.menuArr[5].title}
+          name={this.state.menuArr[5].name} />
+
+        <AccordianMenu items={this.state.subMenu[6]}
+          title={this.state.menuArr[6].title}
+          name={this.state.menuArr[6].name} />
 
       </div>
     );

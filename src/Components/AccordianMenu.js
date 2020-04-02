@@ -4,7 +4,11 @@ class AccordianMenu extends Component {
     super(props);
   }
   render() {
-    if (this.props.isLoaded) {
+    if (this.props.items == undefined 
+          || this.props.items.length == 0 
+          || this.props.items == null ) {
+      return null;
+    } else {
       let items = this.props.items.map(( item, idx ) => {
         return (
           <tr key={ idx }>
@@ -22,11 +26,12 @@ class AccordianMenu extends Component {
                 {this.props.title}</button>
             </div>
 
-            <div id={"collapse"+this.props.name} className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div id={"collapse"+this.props.name} className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 
               <div className="card-body">
                 <div>
-                  <table className="table table-striped w-50 p-3">
+                  <table className="table table-striped p-5">
+                    {/* <table className="table table-striped w-50 p-3"> */}
                     <tbody>
                       {items}
                     </tbody>
@@ -37,8 +42,6 @@ class AccordianMenu extends Component {
           </div>
         </div>
       );
-    } else {
-      return null;
     }
   }
 }
