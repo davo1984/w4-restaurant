@@ -54,7 +54,7 @@ class App extends Component {
         // check to make sure we have the right number of items
         if(this.state.menuArr[i].num != this.state.subMenu[i].length){
           await this.getMenuItems(i, this.state.menuArr[i].num - this.state.subMenu[i].length);
-          console.log('i=',i);
+          // console.log('i=',i);
         }
       }
       this.setState({
