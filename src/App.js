@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { faTrademark, faCocktail, faLungsVirus, faCloudMeatball, faFlushed } from "@fortawesome/free-solid-svg-icons";
-import { faGrav } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faTrademark, faCocktail, faLungsVirus, faCloudMeatball, faFlushed } from "@fortawesome/free-solid-svg-icons";
+// import { faGrav } from "@fortawesome/free-brands-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Axios from "axios";
 import './App.css';
 import ShowMap from './Components/ShowMap.js';
@@ -20,6 +20,7 @@ class App extends Component {
       { name: "Seafood", title: "Seafood Main Courses", num: 12 },
       ],
       subMenu: [],
+      isLoaded: false,
     }
   }
 
@@ -52,9 +53,12 @@ class App extends Component {
       for (let i=0 ; i < this.state.menuArr.length ; i++) {  // loop here menuArr
         await this.getMenuItems(i, this.state.menuArr[i].num);
         // check to make sure we have the right number of items
-        if(this.state.menuArr[i].num != this.state.subMenu[i].length){
-          await this.getMenuItems(i, this.state.menuArr[i].num - this.state.subMenu[i].length);
-          // console.log('i=',i);
+        if (this.state.subMenu.length > 0) {
+          if(this.state.menuArr[i].num != this.state.subMenu[i].length){
+            await this.getMenuItems(i, this.state.menuArr[i].num - this.state.subMenu[i].length);
+            // console.log('i=',i);
+          }
+
         }
       }
       this.setState({
@@ -81,7 +85,8 @@ class App extends Component {
         <div className="row mx-3">
           <div className="col-3">
             <h1>Camus&#39; Absurdist Dining</h1>
-            <p>Even after your Fall don't be The Stranger!<FontAwesomeIcon icon={faGrav} /></p>
+            <p>Even after your Fall don't be The Stranger!</p>
+            {/* <p>Even after your Fall don't be The Stranger!<FontAwesomeIcon icon={faGrav} /></p> */}
             <p>Hours:</p>
             <ul className="list-group mx-auto">
               <li className="list-group-item">Mon: Midnight - 8 AM</li>
@@ -107,10 +112,13 @@ class App extends Component {
           </div>
         </div>
 
-        <AccordianMenu items={this.state.subMenu[0]} 
-            name={this.state.menuArr[0].name}/>
-        <AccordianMenu items={this.state.subMenu[1]} 
-            name={this.state.menuArr[1].name} />
+        <AccordianMenu items={this.state.subMenu[0]}
+          title={this.state.menuArr[0].title} 
+          name={this.state.menuArr[0].name} />
+
+        <AccordianMenu items={this.state.subMenu[1]}
+          title={this.state.menuArr[1].title} 
+          name={this.state.menuArr[1].name} />
 
       </div>
     );
