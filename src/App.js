@@ -4,10 +4,9 @@ import React, { Component } from "react";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Axios from "axios";
 import './App.css';
-// import ShowMap from './Components/ShowMap.js';
+import ShowMap from './Components/ShowMap.js';
 // import NavMenu from './Components/NavMenu.js';
 import AccordianMenu from './Components/AccordianMenu.js';
-// import RetrieveMenuItems from './Components/RetrieveMenuItems.js';
 
 class App extends Component {
   constructor(props) {
@@ -62,8 +61,8 @@ class App extends Component {
             await this.getMenuItems(i, this.state.menuArr[i].num - this.state.subMenu[i].length);
             // console.log('i=',i);
           }
-
         }
+
       }
       this.setState({
         isLoaded: true,
@@ -77,8 +76,16 @@ class App extends Component {
 
   async componentDidMount () {
     
-    await this.fillMenus();
-      
+
+    for (let i = 0; i < this.state.menuArr.length; i++) {  // loop here menuArr
+      await this.fillMenus();
+      // check to make sure we have the right number of items
+      if (this.state.subMenu.length > 0) {
+        if (this.state.menuArr[i].num != this.state.subMenu[i].length) {
+          await this.getMenuItems(i, this.state.menuArr[i].num - this.state.subMenu[i].length);
+        }
+      }
+    } 
   }
 
   render() {
@@ -109,9 +116,9 @@ class App extends Component {
           <div className="col-3 text-center">
             <h1>Visit our old location!</h1>
 
-            {/* <div id="googleMap" className="pr-3 pb-3">
+            <div id="googleMap" className="pr-3 pb-3">
               <ShowMap />
-            </div> */}
+            </div>
 
           </div>
         </div>
