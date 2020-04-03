@@ -7,7 +7,7 @@
         The restaurant's address
         The restaurant's hours of operation
 
-    Access the API using Axios. Learn more
+    Access the API using Axios.
 
     Create a dynamic restaurant menu
         Must include at least five sections for unique meal type (appetizers, lunch, main course, sides, dessert, etc) with unique food items

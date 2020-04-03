@@ -62,7 +62,6 @@ class App extends Component {
             // console.log('i=',i);
           }
         }
-
       }
       this.setState({
         isLoaded: true,
@@ -76,7 +75,6 @@ class App extends Component {
 
   async componentDidMount () {
     
-
     for (let i = 0; i < this.state.menuArr.length; i++) {  // loop here menuArr
       await this.fillMenus();
       // check to make sure we have the right number of items
