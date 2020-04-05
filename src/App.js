@@ -6,7 +6,7 @@ import Axios from "axios";
 import './App.css';
 import ShowMap from './Components/ShowMap.js';
 // import NavMenu from './Components/NavMenu.js';
-import AccordianMenu from './Components/AccordianMenu.js';
+import AccordionMenu from './Components/AccordionMenu.js';
 
 class App extends Component {
   constructor(props) {
@@ -97,7 +97,8 @@ class App extends Component {
             <p>Even after your Fall don't be The Stranger!</p>
             {/* <p>Even after your Fall don't be The Stranger!<FontAwesomeIcon icon={faGrav} /></p> */}
             <p>Hours:</p>
-            <ul className="list-group mx-auto">
+            <ul className="list-group mx-auto"> 
+                                  {/* // todo read hours from array */}
               <li className="list-group-item">Mon: Midnight - 8 AM</li>
               <li className="list-group-item">Tue: 9 pm - 8 AM</li>
               <li className="list-group-item">Wed: 3 am - 7 AM</li>
@@ -108,7 +109,9 @@ class App extends Component {
             </ul>
           </div>
           <div className="col-6">
-            <img src="./images/fleur-de-lis.jpeg" className="rounded-circle mt-1" alt="Our establishment" /><p>348 East Main Street<br />Lexington, KY</p>
+            <img src={process.env.PUBLIC_URL + '/images/fleur-de-lis.jpg'}
+              className="rounded-circle mt-1" alt="Our establishment" />
+              <p>348 East Main Street<br />Lexington, KY</p>
             {/* <NavMenu /> */}
           </div>
           <div className="col-3 text-center">
@@ -121,33 +124,15 @@ class App extends Component {
           </div>
         </div>
 
-        <AccordianMenu items={this.state.subMenu[0]}
-          title={this.state.menuArr[0].title} 
-          name={this.state.menuArr[0].name} />
+        { this.state.menuArr.map ((item,ndx) => {
 
-        <AccordianMenu items={this.state.subMenu[1]}
-          title={this.state.menuArr[1].title} 
-          name={this.state.menuArr[1].name} />
+            return <AccordionMenu items={this.state.subMenu[ndx]}
+              key={ndx}
+              title={this.state.menuArr[ndx].title} 
+              name={this.state.menuArr[ndx].name} /> 
 
-        <AccordianMenu items={this.state.subMenu[2]}
-          title={this.state.menuArr[2].title}
-          name={this.state.menuArr[2].name} />
-
-        <AccordianMenu items={this.state.subMenu[3]}
-          title={this.state.menuArr[3].title}
-          name={this.state.menuArr[3].name} />
-
-        <AccordianMenu items={this.state.subMenu[4]}
-          title={this.state.menuArr[4].title}
-          name={this.state.menuArr[4].name} />
-
-        <AccordianMenu items={this.state.subMenu[5]}
-          title={this.state.menuArr[5].title}
-          name={this.state.menuArr[5].name} />
-
-        <AccordianMenu items={this.state.subMenu[6]}
-          title={this.state.menuArr[6].title}
-          name={this.state.menuArr[6].name} />
+          })
+        }
 
       </div>
     );

@@ -66,5 +66,5 @@ const onClose = props => {
 
 export default GoogleApiWrapper({
   // apiKey: 'AIzaSyChuf6UEUwT1twd5cHHKuZEqVm643KL_Ek'
-  apiKey: 'AIzaSyBiaAYMvJa3wuN__cCgONxjvyswiU47QTE'
+  apiKey: 'xxxxxxxxxxxxx'
 })(Map);
