@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import { Map, GoogleApiWrapper } from 'google-maps-react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+import MyGoogleKey from './MyGoogleKey.js';
 
 const mapStyles = {
   width: '90%',
@@ -21,8 +22,10 @@ export class ShowMap extends Component {
       <Map
         google={this.props.google}
         zoom={5}
-        style={mapStyles}
-        initialCenter={ this.props.state.camusLocation }
+        // style={mapStyles}
+        // initialCenter={ { this.props.state.camusLocation } }
+        enter={ { lat: 38.092800, lng: -84.454870 } }
+        key={ MyGoogleKey() }
       >
       <Marker 
         position={ this.props.state.camusLocation }
@@ -64,7 +67,8 @@ const onClose = props => {
   }
 };
 
-export default GoogleApiWrapper({
-  // apiKey: 'AIzaSyChuf6UEUwT1twd5cHHKuZEqVm643KL_Ek'
-  apiKey: 'xxxxxxxxxxxxx'
-})(Map);
+export default GoogleApiWrapper(
+  
+    { apiKey: MyGoogleKey() }
+
+)(Map);

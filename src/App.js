@@ -57,7 +57,7 @@ class App extends Component {
         await this.getMenuItems(i, this.state.menuArr[i].num);
         // check to make sure we have the right number of items
         if (this.state.subMenu.length > 0) {
-          if(this.state.menuArr[i].num != this.state.subMenu[i].length){
+          if(this.state.menuArr[i].num !== this.state.subMenu[i].length){
             await this.getMenuItems(i, this.state.menuArr[i].num - this.state.subMenu[i].length);
             // console.log('i=',i);
           }
@@ -79,7 +79,7 @@ class App extends Component {
       await this.fillMenus();
       // check to make sure we have the right number of items
       if (this.state.subMenu.length > 0) {
-        if (this.state.menuArr[i].num != this.state.subMenu[i].length) {
+        if (this.state.menuArr[i].num !== this.state.subMenu[i].length) {
           await this.getMenuItems(i, this.state.menuArr[i].num - this.state.subMenu[i].length);
         }
       }
@@ -109,7 +109,7 @@ class App extends Component {
             </ul>
           </div>
           <div className="col-6">
-            <img src={process.env.PUBLIC_URL + '/images/fleur-de-lis.jpg'}
+            <img src={process.env.PUBLIC_URL+'/Fleur-du-lis-1_rsz500.jpg'}
               className="rounded-circle mt-1" alt="Our establishment" />
               <p>348 East Main Street<br />Lexington, KY</p>
             {/* <NavMenu /> */}
