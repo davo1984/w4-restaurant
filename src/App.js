@@ -111,7 +111,7 @@ class App extends Component {
           <div className="col-6">
             <img src={process.env.PUBLIC_URL+'/Fleur-du-lis-1_rsz500.jpg'}
               className="rounded-circle mt-1" alt="Our establishment" />
-              <p>348 East Main Street<br />Lexington, KY</p>
+              <p>5655 Government Street<br />San Francisco, KY</p>
             {/* <NavMenu /> */}
           </div>
           <div className="col-3 text-center">
