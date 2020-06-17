@@ -20,6 +20,7 @@
     "jquery": "^3.4.1",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
+    "react-dependent-script": "^1.1.2",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
   },
