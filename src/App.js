@@ -18,7 +18,7 @@ class App extends Component {
       { name: "Appetizers", title: "Appetizers and Hors d'oeuvres", num: 8},
       { name: "Entrees", title: "Entrees", num: 9 },
       { name: "Seafood", title: "Seafood Main Courses", num: 14 },
-      { name: "Meat", title: "Beef, Veil, Lamb and Goat", num: 7 },
+      { name: "Meat", title: "Beef, Veal, Lamb and Goat", num: 7 },
       { name: "Vegan", title: "Vegan and Vegetarian Courses", num: 9 },
       { name: "Haggis", title: "Haggis and other abominations", num: 3 },
       ],
@@ -75,6 +75,7 @@ class App extends Component {
 
   async componentDidMount () {
     
+// console.log('process.env.PUBLIC_URL', process.env.PUBLIC_URL);
     for (let i = 0; i < this.state.menuArr.length; i++) {  // loop here menuArr
       await this.fillMenus();
       // check to make sure we have the right number of items
@@ -109,7 +110,8 @@ class App extends Component {
             </ul>
           </div>
           <div className="col-6">
-            <img src={process.env.PUBLIC_URL+'/Fleur-du-lis-1_rsz500.jpg'}
+            {/* <img src={process.env.PUBLIC_URL+'/images/Fleur-du-lis-1_rsz500.jpg'} */}
+            <img src={process.env.PUBLIC_URL+'/images/fleur-du-lis-1_rsz500.jpg'}
               className="rounded-circle mt-1" alt="Our establishment" />
               <p>5655 Government Street<br />San Francisco, KY</p>
             {/* <NavMenu /> */}
