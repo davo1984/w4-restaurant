@@ -4,7 +4,7 @@ import React, { Component } from "react";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Axios from "axios";
 import './App.css';
-import ShowMyMap from './Components/ShowMap.js';
+import MyGoogleKey from './Components/MyGoogleKey.js';
 // import ShowMap from './Components/ShowMap.js';
 // import NavMenu from './Components/NavMenu.js';
 import AccordionMenu from './Components/AccordionMenu.js';
@@ -123,7 +123,8 @@ class App extends Component {
                             <h1>Visit our old location!</h1>
 
                             <div id="googleMap" className="pr-3 pb-3">
-                                <img src="https://maps.googleapis.com/maps/api/staticmap?center=30.444950%2c%20-91.131540&zoom=15&size=300x600&maptype=roadmap&markers=color:red|30.444950,-91.131540&key=AIzaSyDIRw2gbA8VBgcomeDcLHEgDbGLjxyveis" />
+                                <img src={"https://maps.googleapis.com/maps/api/staticmap?center=30.444950%2c%20-91.131540&zoom=15&size=300x600&maptype=roadmap&markers=color:red|30.444950,-91.131540&key="
+                                        + MyGoogleKey() } />
                                 {/* <ShowMyMap center={{
                                         lat: 30.444950,
                                         lng: -91.131540
